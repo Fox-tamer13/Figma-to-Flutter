@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'screens/home_screen.dart';
+import 'themes/app_theme.dart';
 
 void main() {
   runApp(const SpoopyFinderApp());
@@ -10,9 +11,16 @@ class SpoopyFinderApp extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'Spoopy Finder',
-      home: HomeScreen(),
+    return MaterialApp(
+      title: 'Spooky Find',
+      debugShowCheckedModeBanner: false,
+      
+      // Wire up custom themes
+      theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
+      themeMode: ThemeMode.system, 
+      
+      home: const HomeScreen(),
     );
   }
 }
