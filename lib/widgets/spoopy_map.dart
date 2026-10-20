@@ -10,10 +10,9 @@ class SpoopyMap extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    
+
     return Container(
-      height: 250,
+      height: 300,
       width: double.infinity,
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
@@ -27,17 +26,14 @@ class SpoopyMap extends StatelessWidget {
         options: const MapOptions(
           initialCenter: homeBase,
           initialZoom: 13,
-          minZoom: 3,
-          maxZoom: 18,
-          interactionOptions: InteractionOptions(
-            flags: InteractiveFlag.all & ~InteractiveFlag.rotate,
-          )
         ),
         children: [
           TileLayer(
             urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-            userAgentPackageName: 'com.example.spoopy_finder',
-            tileBuilder: isDark ? darkModeTileBuilder : null,
+            userAgentPackageName: 'com.example.spooky_finder',
+          ),
+          const SimpleAttributionWidget(
+            source: Text('OpenStreetMap contributors'),
           ),
         ],
       ),
