@@ -8,12 +8,14 @@ class HomeScreen extends StatelessWidget {
     final List<String> _scareLevels = const [
     'Mildly Haunted',
     'Zombies Ahead',
-    'Absolute Terror',
+    'Village of Shadows',
   ];
 
   @override
   Widget build(BuildContext context) {
     const selectedLevel = 'Mildly Haunted';
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Scaffold(
       appBar: const AppHeader(title: 'Spoopy Finder'),
       body: SingleChildScrollView(
@@ -21,14 +23,14 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const SizedBox(height: 24),
+            const SizedBox(height: 40),
             ScareLevelDropdown(
               selectedValue: selectedLevel,
               items: _scareLevels,
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: 40),
             const MapPlaceholder(),
-            const SizedBox(height: 32),
+            const SizedBox(height: 24),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -36,16 +38,20 @@ class HomeScreen extends StatelessWidget {
                   onPressed: () {},
                   icon: SvgPicture.asset(
                     'assets/icons/home/camera_icon2.svg',
-                    width: 40,
-                    height: 40,
+                    colorFilter: ColorFilter.mode(
+                      colorScheme.secondary,
+                      BlendMode.srcIn,
+                    ),
                   ),
                 ),
                 IconButton(
                   onPressed: () {},
                   icon: SvgPicture.asset(
                     'assets/icons/home/photo_icon2.svg',
-                    width: 40,
-                    height: 40,
+                    colorFilter: ColorFilter.mode(
+                      colorScheme.secondary,
+                      BlendMode.srcIn,
+                    ),
                   )
                 ),
               ],
