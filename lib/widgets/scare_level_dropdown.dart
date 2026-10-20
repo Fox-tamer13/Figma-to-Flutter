@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class ScareLevelDropdown extends StatelessWidget{
+class ScareLevelDropdown extends StatelessWidget {
   final String selectedValue;
   final List<String> items;
 
@@ -11,17 +11,31 @@ class ScareLevelDropdown extends StatelessWidget{
   });
 
   @override
-  Widget build(BuildContext conext) {
-    return DropdownButton<String>(
-      value: selectedValue,
-      isExpanded: true,
-      items: items.map((String value){
-        return DropdownMenuItem<String>(
+  Widget build(BuildContext context) {
+    return DropdownMenu<String>(
+      
+      initialSelection: selectedValue,
+      expandedInsets: EdgeInsets.zero,
+
+      inputDecorationTheme: InputDecorationTheme(
+        filled: true,
+        fillColor: Theme.of(context).colorScheme.surfaceContainerHigh,
+      ),
+      
+      textStyle: TextStyle(
+      color: Theme.of(context).colorScheme.onSurfaceVariant,
+      ),
+      
+      dropdownMenuEntries: items.map<DropdownMenuEntry<String>>((String value) {
+        return DropdownMenuEntry<String>(
           value: value,
-          child: Text(value),
+          label: value,
         );
       }).toList(),
-      onChanged: (_) {},
+      
+      onSelected: (String? newValue) {
+        
+      },
     );
   }
 }
