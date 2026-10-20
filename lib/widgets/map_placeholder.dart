@@ -1,21 +1,28 @@
 import 'package:flutter/material.dart';
 
-class MapPlaceholder extends StatelessWidget{
+class MapPlaceholder extends StatelessWidget {
   const MapPlaceholder({super.key});
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Container(
-      height: 250,
+      height: 200,
+      width: double.infinity,
       decoration: BoxDecoration(
-        color: Colors.grey[300],
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          width: 1,
+          color: Theme.of(context).colorScheme.outline,
+        ),
       ),
-      child: const Center(
-        child: Icon(
-          Icons.map,
-          size: 64,
-          color: Colors.grey,
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            Icon(Icons.map_outlined, size: 48),
+            SizedBox(height: 8),
+            Text('Regional Map Area'),
+          ],
         ),
       ),
     );
