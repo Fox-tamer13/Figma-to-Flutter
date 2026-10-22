@@ -70,6 +70,7 @@ flutter:
    - assets/icons/home/
    - assets/icons/gallery/
    - assets/icons/photo_detail/
+   - assets/data/
 
 
   # An image asset can refer sto one or more resolution-specific "variants", see
