@@ -1,11 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
+import '../models/attraction.dart';
 
 class SpoopyMap extends StatelessWidget {
-  const SpoopyMap({super.key});
+  const SpoopyMap({super.key, this.attractions = const[]});
+
+  final List<Attraction> attractions;
 
   static const LatLng homeBase = LatLng(39.7392, -104.9903);
+  IconData _iconFor(AttractionType type) {
+    return switch (type) {
+      AttractionType.hauntedHouse => Icons.cottage,
+      AttractionType.pumpkinPatch => Icons.agriculture,
+      AttractionType.cornMaze => Icons.grass,
+    };
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +48,31 @@ class SpoopyMap extends StatelessWidget {
             urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
             userAgentPackageName: 'com.example.spooky_finder',
             tileBuilder: isDark ? darkModeTileBuilder : null,
+          ),
+          MarkerLayer(
+            markers: [
+              for (final attraction in attractions)
+                Marker(
+                  point: attraction.location,
+                  width: 40,
+                  height: 40,
+                  child: Tooltip(
+                    message: attraction.name,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: colorScheme.primary,
+                        shape: BoxShape.circle,
+                        border: Border.all(width: 2, color: colorScheme.surface),
+                      ),
+                      child: Icon(
+                        _iconFor(attraction.type),
+                        color: colorScheme.onPrimary,
+                        size: 22,
+                      ),
+                    ),
+                  ),
+                ),
+            ],
           ),
           const SimpleAttributionWidget(
             source: Text('OpenStreetMap contributors'),

@@ -1,22 +1,8 @@
 import 'package:flutter/material.dart';
 import 'screens/home_screen.dart';
 import 'themes/app_theme.dart';
-import 'view_models/attractions_view_model.dart';
 
-Future<void> main() async {
-
-  WidgetsFlutterBinding.ensureInitialized();
-
-  final viewModel = AttractionsViewModel();
-  await viewModel.loadAttractions();
-  debugPrint('👻 Loaded ${viewModel.attractions.length} spoopy spoops');
-  for (final attraction in viewModel.attractions) {
-    debugPrint('  • $attraction');
-  }
-  if (viewModel.errorMessage != null) {
-    debugPrint('❌ ${viewModel.errorMessage}');
-  }
-
+void main() {
   runApp(const SpoopyFinder());
 }
 
