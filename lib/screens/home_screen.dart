@@ -4,6 +4,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../view_models/attractions_view_model.dart';
 import '../view_models/location_view_model.dart';
 import '../models/attraction.dart';
+import '../view_models/photos_view_model.dart';
+import 'camera_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -21,18 +23,21 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
   final AttractionsViewModel _viewModel = AttractionsViewModel();
   final LocationViewModel _locationViewModel = LocationViewModel();
+  final PhotosViewModel _photosViewModel = PhotosViewModel();
 
   @override
   void initState() {
     super.initState();
     _viewModel.loadAttractions();
     _locationViewModel.findUser();
+    _photosViewModel.loadPhotos();
   }
 
   @override
   void dispose() {
     _viewModel.dispose();
     _locationViewModel.dispose();
+    _photosViewModel.dispose();
     super.dispose();
   }
 
@@ -41,6 +46,14 @@ class _HomeScreenState extends State<HomeScreen> {
       context: context,
       showDragHandle: true,
       builder: (context) => HauntDetailsSheet(attraction: attraction),
+    );
+  }
+
+  void _openCamera() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => CameraScreen(photosViewModel: _photosViewModel),
+      ),
     );
   }
 
@@ -95,7 +108,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     IconButton(
-                      onPressed: () {},
+                      onPressed: _openCamera,
+                      tooltip: 'Take a photo',
                       icon: SvgPicture.asset(
                         'assets/icons/home/camera_icon2.svg',
                         colorFilter: ColorFilter.mode(
